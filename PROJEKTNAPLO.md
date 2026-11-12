@@ -3,8 +3,8 @@
 ## Csapat és munkamegosztás
 
 | Név vagy GitHub-felhasználónév | Vállalt feladatok és szerep | Saját menüfunkció |
-| --- | --- | --- |
-| … | … | … |
+| Erdős Dániel | --- | --- |
+| Bakos Bendegúz| … | … |
 | … | … | … |
 
 ## Közös megállapodások
