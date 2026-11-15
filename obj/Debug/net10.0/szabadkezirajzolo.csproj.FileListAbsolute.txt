@@ -1,0 +1,16 @@
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\bin\Debug\net10.0\szabadkezirajzolo.exe
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\bin\Debug\net10.0\szabadkezirajzolo.deps.json
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\bin\Debug\net10.0\szabadkezirajzolo.runtimeconfig.json
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\bin\Debug\net10.0\szabadkezirajzolo.runtimeconfig.dev.json
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\bin\Debug\net10.0\szabadkezirajzolo.dll
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\bin\Debug\net10.0\szabadkezirajzolo.pdb
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\szabadkezirajzolo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\szabadkezirajzolo.AssemblyInfoInputs.cache
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\szabadkezirajzolo.AssemblyInfo.cs
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\szabadkezirajzolo.csproj.CoreCompileInputs.cache
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\szabadkezirajzolo.dll
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\refint\szabadkezirajzolo.dll
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\szabadkezirajzolo.pdb
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\szabadkezirajzolo.genruntimeconfig.cache
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\ref\szabadkezirajzolo.dll
+C:\Users\Bdeguu\source\repos\szabadkezirajzolo\szabadkezirajzolo\obj\Debug\net10.0\szabadke.6457728E.Up2Date
