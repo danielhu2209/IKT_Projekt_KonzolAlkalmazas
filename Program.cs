@@ -12,11 +12,31 @@ namespace szabadkezirajzolo
         }
         static string Karaktervalaszto()
         {
+            char[] karakterek = { '█', '▓', '▒', '░', '@', '#', '%', '&', '$', '+', '*', '=', ';', ':', ',', '.', '\'', '`', '▀', '▄', '▌', '▐', '▖', '▗', '▘', '▝', '▚', '▞', '-', '_', '~', '¯', '|', '!', 'I', 'l', '1', '[', ']', '/', '\\', 'V', 'A', 'X', 'Y', 'Z', '7', '(', ')', '{', '}', 'O', 'o', 'C', 'c', 'U', 'u', 'S', 's', '•', '─', '│', '┌', '┐', '└', '┘', '├', '┤', '┬', '┴', '┼' };
+
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("KARAKTERVÁLASZTÓ");
-            Console.WriteLine("Választhat az alábbi előre beállított karakterek közűl vagy Használhat saját karaktert is.");
+            Console.WriteLine("Választhat az alábbi előre beállított karakterek közűl vagy használhat saját karaktert is.");
+
+            HelyreIras("↑", 1, 5);
+
+            for (int i = 0; i < karakterek.Length; i++)
+            {
+
+                HelyreIras(karakterek[i].ToString(), i, 5);
+                HelyreIras(" ", i + 1, 5);
+            }
+
+            Console.ReadKey();
+
+
+            return "";
         }
+
+
+
+
         static void RajzolasMod()
         {
 
@@ -26,13 +46,13 @@ namespace szabadkezirajzolo
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine("Konzolos Rajzolo alkamazás(BB&ED)".ToUpper());
+            Console.WriteLine("Konzolos Rajzolo alkamazás (BB&ED)".ToUpper());
             Console.ResetColor();
             HelyreIras("Valassz a menu pontok kozul \na nyilakkal es az enterrel!\nA rajzolas megkezdesehez nyomd le\na SPACE billentyut!", 0, 1);
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             HelyreIras("Menu:", 3, 5);
-            
+
             int konzolSzelesseg = Console.WindowWidth;
             int konzolMagassag = Console.WindowHeight;
 
@@ -128,12 +148,12 @@ namespace szabadkezirajzolo
 
                     break;
                 case true:
-                    
+
                     break;
             }
 
 
-            for (int i = 0; i < konzolMagassag-1; i++)
+            for (int i = 0; i < konzolMagassag - 1; i++)
             {
 
                 HelyreIras("|", konzolSzelesseg - 85, i);
@@ -144,10 +164,12 @@ namespace szabadkezirajzolo
         {
             char karakter = '#';
             int valasztohelye = 7;
+
             while (true)
             {
                 Menurajzolas(false, valasztohelye);
-                ConsoleKeyInfo bill = Console.ReadKey();
+                ConsoleKeyInfo bill = Console.ReadKey(true);
+
                 switch (bill.Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -156,21 +178,25 @@ namespace szabadkezirajzolo
                             valasztohelye--;
                         }
                         break;
+
                     case ConsoleKey.DownArrow:
                         if (valasztohelye < 11)
                         {
                             valasztohelye++;
                         }
                         break;
+
                     case ConsoleKey.Enter:
-                        switch (Menurajzolas()) {
-                            case 7;
+                        switch (valasztohelye)
+                        {
+                            case 7:
+                                Console.Clear();
                                 Karaktervalaszto();
-
-
+                                break;
+                            case 11:
+                                return;
                         }
-                            
-                                
+                        break;
 
                     case ConsoleKey.Spacebar:
                         RajzolasMod();
@@ -180,4 +206,3 @@ namespace szabadkezirajzolo
         }
     }
 }
-
