@@ -10,6 +10,13 @@ namespace szabadkezirajzolo
             Console.SetCursorPosition(szelesseg, magassag);
             Console.WriteLine(szoveg);
         }
+        static string Karaktervalaszto()
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("KARAKTERVÁLASZTÓ");
+            Console.WriteLine("Választhat az alábbi előre beállított karakterek közűl vagy Használhat saját karaktert is.");
+        }
         static void RajzolasMod()
         {
 
@@ -17,9 +24,15 @@ namespace szabadkezirajzolo
         static int Menurajzolas(bool rajzolaskozben, int valasztohelye)
         {
             Console.Clear();
-            HelyreIras("Konzolos rajzolo program (BB&ED)\n\n", 0, 0);
-            HelyreIras("Valassz a menu pontok kozul a nyilakkal es az enterrel!\n A rajzolas megkezdesehez nyomd le a SPACE billentyut!", 0, 1);
-            HelyreIras("Menu:", 3, 3);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("Konzolos Rajzolo alkamazás(BB&ED)".ToUpper());
+            Console.ResetColor();
+            HelyreIras("Valassz a menu pontok kozul \na nyilakkal es az enterrel!\nA rajzolas megkezdesehez nyomd le\na SPACE billentyut!", 0, 1);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            HelyreIras("Menu:", 3, 5);
+            
             int konzolSzelesseg = Console.WindowWidth;
             int konzolMagassag = Console.WindowHeight;
 
@@ -35,72 +48,72 @@ namespace szabadkezirajzolo
                     ConsoleColor szin = ConsoleColor.Red;
 
 
-                    if (valasztohelye == 5)
+                    if (valasztohelye == 7)
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
-                        HelyreIras("Karakter valasztasa", 3, 5);
+                        HelyreIras("Karakter valasztasa", 3, 7);
                     }
                     else
                     {
                         Console.BackgroundColor = ConsoleColor.Red;
                         Console.ForegroundColor = ConsoleColor.DarkRed;
-                        HelyreIras("Karakter valasztasa", 3, 5);
-                    }
-
-                    if (valasztohelye == 6)
-                    {
-                        Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                        HelyreIras("Szin valasztasa", 3, 6);
-                    }
-                    else
-                    {
-                        Console.BackgroundColor = ConsoleColor.Green;
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        HelyreIras("Szin valasztasa", 3, 6);
-                    }
-
-                    if (valasztohelye == 7)
-                    {
-                        Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                        HelyreIras("Fajl beolvasas", 3, 7);
-                    }
-                    else
-                    {
-                        Console.BackgroundColor = ConsoleColor.Blue;
-                        Console.ForegroundColor = ConsoleColor.DarkBlue;
-                        HelyreIras("Fajl beolvasas", 3, 7);
+                        HelyreIras("Karakter valasztasa", 3, 7);
                     }
 
                     if (valasztohelye == 8)
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
-                        HelyreIras("Segitseg", 3, 8);
-
+                        HelyreIras("Szin valasztasa", 3, 8);
                     }
                     else
                     {
-                        Console.BackgroundColor = ConsoleColor.Magenta;
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        HelyreIras("Segitseg", 3, 8);
-
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        HelyreIras("Szin valasztasa", 3, 8);
                     }
 
                     if (valasztohelye == 9)
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
-                        HelyreIras("Kilepes", 3, 9);
+                        HelyreIras("Fajl beolvasas", 3, 9);
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Blue;
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        HelyreIras("Fajl beolvasas", 3, 9);
+                    }
+
+                    if (valasztohelye == 10)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        HelyreIras("Segitseg", 3, 10);
+
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Magenta;
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        HelyreIras("Segitseg", 3, 10);
+
+                    }
+
+                    if (valasztohelye == 11)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        HelyreIras("Kilepes", 3, 11);
 
                     }
                     else
                     {
                         Console.BackgroundColor = ConsoleColor.Cyan;
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        HelyreIras("Kilepes", 3, 9);
+                        HelyreIras("Kilepes", 3, 11);
 
                     }
                     Console.BackgroundColor = ConsoleColor.Black;
@@ -115,12 +128,12 @@ namespace szabadkezirajzolo
 
                     break;
                 case true:
-                    Console.WriteLine("Konzolos rajzolo program (BB&ED)");
+                    
                     break;
             }
 
 
-            for (int i = 0; i < konzolMagassag; i++)
+            for (int i = 0; i < konzolMagassag-1; i++)
             {
 
                 HelyreIras("|", konzolSzelesseg - 85, i);
@@ -129,8 +142,8 @@ namespace szabadkezirajzolo
         }
         static void Main(string[] args)
         {
-
-            int valasztohelye = 5;
+            char karakter = '#';
+            int valasztohelye = 7;
             while (true)
             {
                 Menurajzolas(false, valasztohelye);
@@ -138,19 +151,27 @@ namespace szabadkezirajzolo
                 switch (bill.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        if (valasztohelye > 5)
+                        if (valasztohelye > 7)
                         {
                             valasztohelye--;
                         }
                         break;
                     case ConsoleKey.DownArrow:
-                        if (valasztohelye < 9)
+                        if (valasztohelye < 11)
                         {
                             valasztohelye++;
                         }
                         break;
                     case ConsoleKey.Enter:
-                        break;
+                        switch (Menurajzolas()) {
+                            case 7;
+                                Karaktervalaszto();
+
+
+                        }
+                            
+                                
+
                     case ConsoleKey.Spacebar:
                         RajzolasMod();
                         break;
