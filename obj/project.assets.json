@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bdeguu\\source\\repos\\szabadkezirajzolo\\szabadkezirajzolo\\szabadkezirajzolo.csproj",
+      "projectUniqueName": "C:\\Users\\Bdeguu\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj",
       "projectName": "szabadkezirajzolo",
-      "projectPath": "C:\\Users\\Bdeguu\\source\\repos\\szabadkezirajzolo\\szabadkezirajzolo\\szabadkezirajzolo.csproj",
+      "projectPath": "C:\\Users\\Bdeguu\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj",
       "packagesPath": "C:\\Users\\Bdeguu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bdeguu\\source\\repos\\szabadkezirajzolo\\szabadkezirajzolo\\obj\\",
+      "outputPath": "C:\\Users\\Bdeguu\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Bdeguu\\AppData\\Roaming\\NuGet\\NuGet.Config",
