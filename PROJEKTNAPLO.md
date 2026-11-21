@@ -17,7 +17,8 @@
 
 | Dátum | Ki | Mi készült el vagy miben állapodtunk meg? | Következő lépés vagy commit |
 | 2026.11.15 | Bakos Bendegúz | Kezdő menü létrehozása | Hibák kijavítása, karakter választás menü létrehozása |
-| … | … | … | … |
+| 2026.11.17| Bakos Bendeguz | Kezdo menu hibajainak kijavitasa | Karakter valaszto menu letrehozasa |
+| 2026.11.20-21| Bakos Bendeguz | Karakter valaszto menu letrehozasa | rajz mod menujenek letrehozasa |
 
 ## Másik pár tesztje
 
