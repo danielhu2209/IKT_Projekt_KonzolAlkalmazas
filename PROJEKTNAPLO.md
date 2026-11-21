@@ -30,6 +30,6 @@
 
 Aki használt AI-t, írja le a nevét, miben kért segítséget, és mit tanult meg belőle.
 
-- Név: …
-- Miben kértem segítséget: …
-- Mit tanultam meg: …
+- Név: Bakos Bendeguz
+- Miben kértem segítséget: valaszthato karakterek listajanak elkeszitese,Hibak keresese
+- Mit tanultam meg: tombok kiirasa nem oylan mint pythonba ,nem lehet oket egybol ki irni (legalabbis char[]-t nem) helyette a string.join()-t kell hazsnalni
