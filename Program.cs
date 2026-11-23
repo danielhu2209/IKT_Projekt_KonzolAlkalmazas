@@ -1028,6 +1028,38 @@ namespace szabadkezirajzolo
                             case 10:
                                 Mentes(szoveg, mentesekSzama);
                                 break;
+                            case 11:
+                                Console.Clear();
+
+                                Console.WriteLine("===== SEGITSEG =====");
+                                Console.WriteLine();
+                                Console.WriteLine("MENU VEZERLESE");
+                                Console.WriteLine("Fel/Le nyilak - Menuvalasztas");
+                                Console.WriteLine("Enter        - Kivalasztas");
+                                Console.WriteLine("Space        - Rajzolasi mod");
+                                Console.WriteLine();
+                                Console.WriteLine("RAJZOLASI MOD");
+                                Console.WriteLine("Nyilak       - Kurzor mozgatasa");
+                                Console.WriteLine("Space        - Rajzeszkoz fel/le");
+                                Console.WriteLine("Enter        - Egy karakter rajzolasa");
+                                Console.WriteLine("1-5          - Rajzkarakter valtasa");
+                                Console.WriteLine("R            - Radir be/ki");
+                                Console.WriteLine("Esc          - Vissza a menube");
+                                Console.WriteLine();
+                                Console.WriteLine("NYOMDAK");
+                                Console.WriteLine("F1-F3        - X alakzat");
+                                Console.WriteLine("F4-F6        - Negyzetkeret");
+                                Console.WriteLine("F7-F9        - Kereszt (+)");
+                                Console.WriteLine("F10-F12      - Rombuszkeret");
+                                Console.WriteLine("Minden csoport: 3x3, 5x5, 7x7");
+                                Console.WriteLine();
+                                Console.WriteLine("MENTES ES BEOLVASAS");
+                                Console.WriteLine("Mentes       - Rajz mentese TXT fajlba");
+                                Console.WriteLine("Fajl beolvasas - TXT rajz megnyitasa");
+                                Console.WriteLine();
+                                Console.WriteLine("Visszalepeshez nyomj meg egy billentyut!");
+                                Console.ReadKey(true);
+                                break;
                             case 12:
                                 radir = !radir;
                                 break;

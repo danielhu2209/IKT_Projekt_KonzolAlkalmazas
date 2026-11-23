@@ -21,6 +21,7 @@
 | 2026.11.17 | Bakos Bendeguz | Kezdo menu hibajainak kijavitasa | Karakter valaszto menu letrehozasa |
 | 2026.11.20-21 | Bakos Bendeguz | Karakter valaszto menu letrehozasa | rajz mod menujenek letrehozasa |
 | 2026.11.22 | Erdős Dániel | Szín választás menü létrehozása | Rajzolás funkció , segítség menü |
+| 2026.11.24 | Bakos Bendeguz | nyomdak elkeszitese,program kissebhibajinak kijavitasa,dokumentacio frissitese |beadas |
 
 ## Másik pár tesztje
 
@@ -33,5 +34,5 @@
 Aki használt AI-t, írja le a nevét, miben kért segítséget, és mit tanult meg belőle.
 
 - Név: Bakos Bendeguz
-- Miben kértem segítséget: valaszthato karakterek listajanak elkeszitese,Hibak keresese
+- Miben kértem segítséget: valaszthato karakterek listajanak elkeszitese,Hibak keresese,fajl beolvasasa elmentese
 - Mit tanultam meg: tombok kiirasa nem oylan mint pythonba ,nem lehet oket egybol ki irni (legalabbis char[]-t nem) helyette a string.join()-t kell hazsnalni
