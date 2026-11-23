@@ -1,4 +1,4 @@
-﻿using System.Security;
+using System.Security;
 using System.Text;
 using System.Windows.Forms;
 namespace szabadkezirajzolo
@@ -264,86 +264,164 @@ namespace szabadkezirajzolo
 
             Console.ResetColor();
         }
-        static void RajzolasMod(char[] valasztottkarakterek, int idx, StringBuilder sb, int maxmagassag, ConsoleColor szin, ConsoleColor[] szinek)
+       
+        // 35 karakterre, így a sorban előtte álló régi szöveg is letörlődik.
+        static void PanelSor(string szoveg, int sor)
         {
-            bool felemelve = true;
-            bool radir = false;
-            int konzolSzelesseg = Console.WindowWidth;
+            HelyreIras(szoveg.PadRight(35), 0, sor);
+        }
+
+     
+        static void CellaRajzolas(int x, int y, char karakter, ConsoleColor szin, StringBuilder sb, ConsoleColor[] szinek)
+        {
+            int idx = y * 82 + x;
+            sb[idx] = karakter;
+            szinek[idx] = szin;
+
+            Console.SetCursorPosition(36 + x, y); 
+            Console.ForegroundColor = szin;
+            Console.Write(karakter);
+            Console.ResetColor();
+        }
+
+       
+        // Ha a radír be van kapcsolva, a rajzolás karakter helyett szóközt ír,
+        static char RajzoloKarakter(char[] valasztottkarakterek, int idx, bool radir)
+        {
+            if (radir)
+            {
+                return ' ';
+            }
+            return valasztottkarakterek[idx];
+        }
+
+
+        static void AllapotKiiras(int x, int y, char[] valasztottkarakterek, int idx, ConsoleColor szin, bool felemelve, bool radir)
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            HelyreIras("RAJZOLASI MOD", 0, 0);
+            Console.ResetColor();
+
+            PanelSor($"Pozicio:   ({x}, {y})", 2);
+            PanelSor($"Karakter:  {valasztottkarakterek[idx]}  ({idx + 1}. a tarbol)", 3);
+
+            PanelSor("Szin:", 4);
+            Console.ForegroundColor = szin;
+            HelyreIras(SzinNeve(szin), 11, 4);
+            Console.ResetColor();
+
+            if (felemelve)
+            {
+                PanelSor("Eszkoz:    felemelve", 5);
+            }
+            else
+            {
+                PanelSor("Eszkoz:    leteve (rajzol)", 5);
+            }
+
+            if (radir)
+            {
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
+                PanelSor("Radir:     BE (torol)", 6);
+                Console.ResetColor();
+            }
+            else
+            {
+                PanelSor("Radir:     ki", 6);
+            }
+
+            PanelSor($"Karaktertar: {string.Join(' ', valasztottkarakterek)}", 7);
+
+            PanelSor("Nyilak:  mozgas", 9);
+            PanelSor("Szokoz:  eszkoz fel / le", 10);
+            PanelSor("1-5:     karakter valtasa", 11);
+            PanelSor("R:       radir be / ki", 12);
+            PanelSor("F1-F12:  nyomdak", 13);
+            PanelSor("Esc:     vissza a menube", 14);
+        }
+
+    
+        static int RajzolasMod(char[] valasztottkarakterek, int idx, StringBuilder sb, int maxmagassag, ConsoleColor szin, ConsoleColor[] szinek, ref bool radir)
+        {
+            bool felemelve = true;  
             int konzolMagassag = Console.WindowHeight;
+
+          
             int[] kurzorPozicio = new int[2];
-            kurzorPozicio[0] = 120 - 84;
+            kurzorPozicio[0] = 36;
             kurzorPozicio[1] = 0;
             bool running = true;
 
+          
+            Console.CursorVisible = false;
+            Console.Clear();
+            for (int i = 0; i < konzolMagassag - 1; i++)
+            {
+                HelyreIras("|", 35, i);
+            }
+            for (int i = 0; i < konzolMagassag - 1; i++)
+            {
+                Console.SetCursorPosition(118, i);
+                Console.Write("|");
+            }
+            RajzlapKirajzolas(sb, szinek, maxmagassag);
+
             while (running)
             {
-                Console.Clear();
+                int x = kurzorPozicio[0] - 36;
+                int y = kurzorPozicio[1];
 
+                Console.CursorVisible = false;
+                AllapotKiiras(x, y, valasztottkarakterek, idx, szin, felemelve, radir);
 
-
-                for (int i = 0; i < konzolMagassag - 1; i++)
-                {
-                    HelyreIras("|", 35, i);
-                }
-                for (int i = 0; i < konzolMagassag - 1; i++)
-                {
-                    Console.SetCursorPosition(118, i);
-                    Console.Write("|");
-                }
-                RajzlapKirajzolas(sb, szinek, maxmagassag);
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.Black;
-                HelyreIras("Rajzolasi mod", 0, 0);
-                Console.ResetColor();
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.Black;
-                HelyreIras($"Jelenlegi eszkoztar:{string.Join(' ', valasztottkarakterek)}", 0, 2);
-                Console.ResetColor();
-                HelyreIras("A karaktertarban valo lepegeteshez \nhasznalja a 1-5 billentyuket", 0, 3);
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.Black;
-                HelyreIras($"A kivalasztot karakter:{valasztottkarakterek[idx]}", 0, 5);
-                Console.ResetColor();
-                HelyreIras("A kivalasztott szin:", 0, 7);
-                Console.ForegroundColor = szin;
-                HelyreIras(SzinNeve(szin), 21, 7);
-                Console.ResetColor();
-                HelyreIras($"Kurzor pozicio", 0, 8);
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.Black;
-
-
-                if (felemelve)
-                {
-                    HelyreIras("Az eszkoz felvan emelve\nnem fogsz rajzolni!", 0, 9);
-                }
-                else
-                {
-                    HelyreIras("Az eszkoz le van teve\nrajzolni fogsz!", 0, 9);
-                }
-                Console.ResetColor();
-                HelyreIras("A radir bekapcsolasahoz nyomd meg \na CTRL gombot", 0, 11);
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.Black;
-
-                if (radir)
-                {
-                    HelyreIras("A radir be van kapcsolva", 0, 13);
-                }
-                else
-                {
-                    HelyreIras("A radir k ivan kapcsolva", 0, 13);
-                }
-                Console.ResetColor();
-                HelyreIras("A kilepeshez nyomd le megegyszer \na Space Billentyut", 0, 14);
+             
                 Console.SetCursorPosition(kurzorPozicio[0], kurzorPozicio[1]);
-                Console.CursorVisible = true; // rajzoláskor a kurzornak látszania kell
+                Console.CursorVisible = true;
                 ConsoleKeyInfo bill = Console.ReadKey(true);
 
-
+              
+                int ujX = x;
+                int ujY = y;
+                bool lepes = false;
 
                 switch (bill.Key)
                 {
+                    case ConsoleKey.UpArrow:
+                        ujY--;
+                        lepes = true;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        ujY++;
+                        lepes = true;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        ujX--;
+                        lepes = true;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        ujX++;
+                        lepes = true;
+                        break;
+
+                    case ConsoleKey.Spacebar:
+                        felemelve = !felemelve; 
+                        if (!felemelve)
+                        {
+                            
+                            CellaRajzolas(x, y, RajzoloKarakter(valasztottkarakterek, idx, radir), szin, sb, szinek);
+                        }
+                        break;
+
+                    case ConsoleKey.Escape:
+                        running = false;
+                        break;
+
+                    case ConsoleKey.R:
+                        radir = !radir; 
+                        break;
+
                     case ConsoleKey.D1:
                     case ConsoleKey.D2:
                     case ConsoleKey.D3:
@@ -352,45 +430,11 @@ namespace szabadkezirajzolo
                         idx = (int)bill.Key - (int)ConsoleKey.D1;
                         break;
 
-
-
-
-
-                    case ConsoleKey.UpArrow:
-                        if (Console.CursorTop > 0)
-                        {
-                            kurzorPozicio[1]--;
-                        }
-                        break;
-                    case ConsoleKey.DownArrow:
-                        if (Console.CursorTop < 27)
-                        {
-                            kurzorPozicio[1]++;
-                        }
-                        break;
-                    case ConsoleKey.RightArrow:
-                        if (Console.CursorLeft < 117)
-                        {
-                            kurzorPozicio[0]++;
-                        }
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        if (Console.CursorLeft > 36)
-                        {
-                            kurzorPozicio[0]--;
-                        }
-                        break;
                     case ConsoleKey.Enter:
-                        Console.ForegroundColor = szin; 
-                        
-                        Console.ResetColor();
-                        int sbIdx = kurzorPozicio[1] * 82 + kurzorPozicio[0] - 36;
-                        sb[sbIdx] = valasztottkarakterek[idx];
-                        szinek[sbIdx] = szin; 
+                       
+                        CellaRajzolas(x, y, RajzoloKarakter(valasztottkarakterek, idx, radir), szin, sb, szinek);
                         break;
-                    case ConsoleKey.Spacebar:
-                        running = false;
-                        break;
+
                     case ConsoleKey.F1:
                         if ((kurzorPozicio[0] - 3 >= 36) &&
                             (kurzorPozicio[0] + 3 <= 117) &&
@@ -402,27 +446,28 @@ namespace szabadkezirajzolo
 
                             int nyomdaIdx;
 
-                            // Bal felső sarok
+                            
                             nyomdaIdx = (eredetihelyY - 3) * 82 + (eredetihelyX - 3 - 36);
                             sb[nyomdaIdx] = valasztottkarakterek[idx];
                             szinek[nyomdaIdx] = szin;
 
-                            // Jobb felső sarok
+                            
                             nyomdaIdx = (eredetihelyY - 3) * 82 + (eredetihelyX + 3 - 36);
                             sb[nyomdaIdx] = valasztottkarakterek[idx];
                             szinek[nyomdaIdx] = szin;
 
-                            // Jobb alsó sarok
+                            
                             nyomdaIdx = (eredetihelyY + 3) * 82 + (eredetihelyX + 3 - 36);
                             sb[nyomdaIdx] = valasztottkarakterek[idx];
                             szinek[nyomdaIdx] = szin;
 
-                            // Bal alsó sarok
+                            
                             nyomdaIdx = (eredetihelyY + 3) * 82 + (eredetihelyX - 3 - 36);
                             sb[nyomdaIdx] = valasztottkarakterek[idx];
                             szinek[nyomdaIdx] = szin;
 
                             
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
                         }
                         else
                         {
@@ -454,8 +499,31 @@ namespace szabadkezirajzolo
                     case ConsoleKey.F12:
                         */
 
+                    default:
+                        Console.Beep(); 
+                        break;
+                }
+
+                if (lepes)
+                {
+                    
+                    if (ujX < 0 || ujX > 81 || ujY < 0 || ujY > maxmagassag - 1)
+                    {
+                        Console.Beep(); 
+                    }
+                    else
+                    {
+                        kurzorPozicio[0] = 36 + ujX;
+                        kurzorPozicio[1] = ujY;
+                        if (!felemelve)
+                        {
+                            CellaRajzolas(ujX, ujY, RajzoloKarakter(valasztottkarakterek, idx, radir), szin, sb, szinek);
+                        }
+                    }
                 }
             }
+
+            return idx;
         }
         static void Mentes(string vegsoSzoveg, int mSzama)
         {
@@ -471,7 +539,7 @@ namespace szabadkezirajzolo
             Console.ReadKey(true);
 
         }
-        static string Menurajzolas(bool rajzolaskozben, int valasztohelye, StringBuilder sb)
+        static string Menurajzolas(bool rajzolaskozben, int valasztohelye, StringBuilder sb, bool radir)
         {
             Console.CursorVisible = false; 
             Console.Clear();
@@ -566,11 +634,31 @@ namespace szabadkezirajzolo
             }
             else
             {
+                Console.BackgroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+            }
+
+            if (radir)
+            {
+                HelyreIras("Radir: BE", 3, 12);
+            }
+            else
+            {
+                HelyreIras("Radir: KI", 3, 12);
+            }
+
+            if (valasztohelye == 13)
+            {
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
+            }
+            else
+            {
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
 
-            HelyreIras("Kilepes", 3, 12);
+            HelyreIras("Kilepes", 3, 13);
 
             Console.ResetColor();
             for (int i = 0; i < konzolMagassag - 1; i++)
@@ -627,13 +715,14 @@ namespace szabadkezirajzolo
                 '#', '#', '#', '#', '#'
             };
             int valKarIdx = 0;
+            bool radir = false; 
             //meg csinald mar azt meg hogy a szamokkal lehet kraktert valtoztatni
             //en ugy talatam ki hoyg az index lesz valtoztatva mindig es a valasztotkarakterek[valkaridx] el irunk majd ki mindent
             int valasztohelye = 7;
 
             while (true)
             {
-                string szoveg = Menurajzolas(false, valasztohelye, rajzSzovegesFormaja);
+                string szoveg = Menurajzolas(false, valasztohelye, rajzSzovegesFormaja, radir);
                 RajzlapKirajzolas(rajzSzovegesFormaja, rajzSzinek, maxmagassag); 
 
                 ConsoleKeyInfo bill = Console.ReadKey(true);
@@ -651,7 +740,7 @@ namespace szabadkezirajzolo
 
                     case ConsoleKey.DownArrow:
 
-                        if (valasztohelye < 12)
+                        if (valasztohelye < 13)
                         {
                             valasztohelye++;
                         }
@@ -701,6 +790,9 @@ namespace szabadkezirajzolo
                                 Mentes(szoveg, mentesekSzama);
                                 break;
                             case 12:
+                                radir = !radir; 
+                                break;
+                            case 13:
                                 return;
 
                         }
@@ -708,7 +800,7 @@ namespace szabadkezirajzolo
                         break;
 
                     case ConsoleKey.Spacebar:
-                        RajzolasMod(valasztottkarakterek, valKarIdx, rajzSzovegesFormaja, maxmagassag, szin, rajzSzinek); 
+                        valKarIdx = RajzolasMod(valasztottkarakterek, valKarIdx, rajzSzovegesFormaja, maxmagassag, szin, rajzSzinek, ref radir);
                         break;
                 }
             }
