@@ -9,7 +9,7 @@ namespace szabadkezirajzolo
         static void HelyreIras(string szoveg, int szelesseg, int magassag)
         {
             Console.SetCursorPosition(szelesseg, magassag);
-            Console.WriteLine(szoveg);
+            Console.Write(szoveg);
         }
 
 
@@ -344,6 +344,18 @@ namespace szabadkezirajzolo
 
                 switch (bill.Key)
                 {
+                    case ConsoleKey.D1:
+                    case ConsoleKey.D2:
+                    case ConsoleKey.D3:
+                    case ConsoleKey.D4:
+                    case ConsoleKey.D5:
+                        idx = (int)bill.Key - (int)ConsoleKey.D1;
+                        break;
+
+
+
+
+
                     case ConsoleKey.UpArrow:
                         if (Console.CursorTop > 0)
                         {
@@ -370,50 +382,47 @@ namespace szabadkezirajzolo
                         break;
                     case ConsoleKey.Enter:
                         Console.ForegroundColor = szin; 
-                        HelyreIras("x", kurzorPozicio[0], kurzorPozicio[1]);
+                        
                         Console.ResetColor();
                         int sbIdx = kurzorPozicio[1] * 82 + kurzorPozicio[0] - 36;
-                        sb[sbIdx] = 'x';
+                        sb[sbIdx] = valasztottkarakterek[idx];
                         szinek[sbIdx] = szin; 
                         break;
                     case ConsoleKey.Spacebar:
                         running = false;
                         break;
                     case ConsoleKey.F1:
-                        if ((kurzorPozicio[0] - 3 >= 36) && (kurzorPozicio[0] + 3 <= 117) && (kurzorPozicio[1] - 3 >= 0) && (kurzorPozicio[1] + 3 <= 27))
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
                         {
+                            int eredetihelyX = kurzorPozicio[0];
+                            int eredetihelyY = kurzorPozicio[1];
+
                             int nyomdaIdx;
-                            int eredetihelyX = Console.CursorLeft;
-                            int eredetihelyY = Console.CursorTop;
-                            //javisd meg ezt a reszt es csinald meg a tobbi nyomdat
-                            HelyreIras("x", eredetihelyX - 3, eredetihelyY - 3);
-                            kurzorPozicio[0] = Console.CursorLeft;
-                            kurzorPozicio[1] = Console.CursorTop;
-                            nyomdaIdx = kurzorPozicio[1] * 82 + kurzorPozicio[0] - 36;
-                            sb[nyomdaIdx] = 'x';
 
-                            HelyreIras("x", eredetihelyX + 3, eredetihelyY - 3);
-                            kurzorPozicio[0] = Console.CursorLeft;
-                            kurzorPozicio[1] = Console.CursorTop;
-                            nyomdaIdx = kurzorPozicio[1] * 82 + kurzorPozicio[0] - 36;
-                            sb[nyomdaIdx] = 'x';
+                            // Bal felső sarok
+                            nyomdaIdx = (eredetihelyY - 3) * 82 + (eredetihelyX - 3 - 36);
+                            sb[nyomdaIdx] = valasztottkarakterek[idx];
+                            szinek[nyomdaIdx] = szin;
 
-                            HelyreIras("x", eredetihelyX + 3, eredetihelyY + 3);
-                            kurzorPozicio[0] = Console.CursorLeft;
-                            kurzorPozicio[1] = Console.CursorTop;
-                            nyomdaIdx = kurzorPozicio[1] * 82 + kurzorPozicio[0] - 36;
-                            sb[nyomdaIdx] = 'x';
+                            // Jobb felső sarok
+                            nyomdaIdx = (eredetihelyY - 3) * 82 + (eredetihelyX + 3 - 36);
+                            sb[nyomdaIdx] = valasztottkarakterek[idx];
+                            szinek[nyomdaIdx] = szin;
 
-                            HelyreIras("x", eredetihelyX - 3, eredetihelyY + 3);
-                            kurzorPozicio[0] = Console.CursorLeft;
-                            kurzorPozicio[1] = Console.CursorTop;
-                            nyomdaIdx = kurzorPozicio[1] * 82 + kurzorPozicio[0] - 36;
-                            sb[nyomdaIdx] = 'x';
+                            // Jobb alsó sarok
+                            nyomdaIdx = (eredetihelyY + 3) * 82 + (eredetihelyX + 3 - 36);
+                            sb[nyomdaIdx] = valasztottkarakterek[idx];
+                            szinek[nyomdaIdx] = szin;
 
+                            // Bal alsó sarok
+                            nyomdaIdx = (eredetihelyY + 3) * 82 + (eredetihelyX - 3 - 36);
+                            sb[nyomdaIdx] = valasztottkarakterek[idx];
+                            szinek[nyomdaIdx] = szin;
 
-
-
-                            Console.SetCursorPosition(eredetihelyX, eredetihelyY);
+                            
                         }
                         else
                         {
@@ -450,7 +459,7 @@ namespace szabadkezirajzolo
         }
         static void Mentes(string vegsoSzoveg, int mSzama)
         {
-            Console.Write("hogyan legyen elmentve a fajl?");
+            HelyreIras("milyen neven legyen elmentve a fajl?",45,15);
             String nev = Console.ReadLine();
 
 
@@ -458,7 +467,7 @@ namespace szabadkezirajzolo
             File.WriteAllText(eredmenyHelye, string.Join(
                 "\n", Enumerable.Range(0, 28).Select(x => vegsoSzoveg.Substring(x * 82, 82)
                 )));
-            Console.WriteLine("Sikeresen elmentve a folytatashoz nyomjon meg egy gombot");
+            Console.WriteLine("Sikeresen elmentve(az asztalra) a folytatashoz nyomjon meg egy gombot");
             Console.ReadKey(true);
 
         }
@@ -663,6 +672,7 @@ namespace szabadkezirajzolo
                             case 9:
 
                                 string beolvasottSzoveg = Beolvasas();
+                                if(beolvasottSzoveg != "") { 
                                 beolvasottSzoveg = beolvasottSzoveg.Replace("\n", "");
 
                                 if (beolvasottSzoveg.Length <= 82 * 28)
@@ -685,7 +695,7 @@ namespace szabadkezirajzolo
                                     Console.ReadKey(true);
                                     Console.ReadKey();
                                 }
-
+                                }
                                 break;
                             case 10:
                                 Mentes(szoveg, mentesekSzama);

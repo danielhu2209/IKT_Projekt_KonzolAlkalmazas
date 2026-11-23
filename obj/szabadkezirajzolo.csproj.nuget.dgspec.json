@@ -1,28 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bdeguu\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj": {}
+    "C:\\Users\\bdeguu_win\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bdeguu\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj": {
+    "C:\\Users\\bdeguu_win\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bdeguu\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj",
+        "projectUniqueName": "C:\\Users\\bdeguu_win\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj",
         "projectName": "szabadkezirajzolo",
-        "projectPath": "C:\\Users\\Bdeguu\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj",
-        "packagesPath": "C:\\Users\\Bdeguu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bdeguu\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\obj\\",
+        "projectPath": "C:\\Users\\bdeguu_win\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\szabadkezirajzolo.csproj",
+        "packagesPath": "C:\\Users\\bdeguu_win\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bdeguu_win\\Documents\\GitHub\\IKT_Projekt_KonzolAlkalmazas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Bdeguu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bdeguu_win\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
         },
         "frameworks": {
           "net10.0-windows": {
@@ -41,7 +40,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "11.0.100"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0-windows": {
@@ -66,7 +65,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\11.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.404/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
