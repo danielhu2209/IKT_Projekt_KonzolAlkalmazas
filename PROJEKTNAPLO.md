@@ -4,8 +4,8 @@
 
 | Név vagy GitHub-felhasználónév | Vállalt feladatok és szerep | Saját menüfunkció |
 | --- | --- | --- |
-| Erdős Dániel | Szín választás, rajzolás , segítség menü | Radír |
-| Bakos Bendegúz | Kezdő menü , rajz mód menü létrehozása, fájl beolvasása ,  karakter választás, nyomdák | … |
+| Erdős Dániel | Szín választás, rajzolás , segítség menü ,rajz mód menü létrehozása| Radír |
+| Bakos Bendegúz | Kezdő menü , fájl beolvasása ,  karakter választás, nyomdák | fajlba mentes |
 
 ## Közös megállapodások
 

@@ -1,3 +1,4 @@
+using System.CodeDom;
 using System.Security;
 using System.Text;
 using System.Windows.Forms;
@@ -145,14 +146,14 @@ namespace szabadkezirajzolo
 
         static void RajzlapKirajzolas(StringBuilder sb, ConsoleColor[] szinek, int maxmagassag)
         {
-        
+
             Console.CursorVisible = false;
 
             for (int sor = 0; sor < maxmagassag; sor++)
             {
                 Console.SetCursorPosition(36, sor);
 
-               
+
                 int kezdet = 0;
                 while (kezdet < 82)
                 {
@@ -163,7 +164,7 @@ namespace szabadkezirajzolo
                         veg++;
                     }
                     Console.ForegroundColor = szinek[kezdoIdx];
-                    Console.Write(sb.ToString(kezdoIdx, veg - kezdet)); 
+                    Console.Write(sb.ToString(kezdoIdx, veg - kezdet));
                     kezdet = veg;
                 }
             }
@@ -264,27 +265,27 @@ namespace szabadkezirajzolo
 
             Console.ResetColor();
         }
-       
+
         // 35 karakterre, így a sorban előtte álló régi szöveg is letörlődik.
         static void PanelSor(string szoveg, int sor)
         {
             HelyreIras(szoveg.PadRight(35), 0, sor);
         }
 
-     
+
         static void CellaRajzolas(int x, int y, char karakter, ConsoleColor szin, StringBuilder sb, ConsoleColor[] szinek)
         {
             int idx = y * 82 + x;
             sb[idx] = karakter;
             szinek[idx] = szin;
 
-            Console.SetCursorPosition(36 + x, y); 
+            Console.SetCursorPosition(36 + x, y);
             Console.ForegroundColor = szin;
             Console.Write(karakter);
             Console.ResetColor();
         }
 
-       
+
         // Ha a radír be van kapcsolva, a rajzolás karakter helyett szóközt ír,
         static char RajzoloKarakter(char[] valasztottkarakterek, int idx, bool radir)
         {
@@ -341,20 +342,117 @@ namespace szabadkezirajzolo
             PanelSor("F1-F12:  nyomdak", 13);
             PanelSor("Esc:     vissza a menube", 14);
         }
+        static void Xrajzolas(int meret, int[] kurzorPozicio, char[] valasztottkarakterek, int idx, StringBuilder sb, ConsoleColor szin, ConsoleColor[] szinek)
+        {
+            int nyomdaIdx = (kurzorPozicio[1]) * 82 + (kurzorPozicio[0] - 36);
+            sb[nyomdaIdx] = valasztottkarakterek[idx];
+            szinek[nyomdaIdx] = szin;
+            for (int i = 0 / 2; i <= (meret - 1) / 2; i++)
+            {
+                nyomdaIdx = (kurzorPozicio[1] - i) * 82 + (kurzorPozicio[0] - i - 36);
+                sb[nyomdaIdx] = valasztottkarakterek[idx];
+                szinek[nyomdaIdx] = szin;
+                nyomdaIdx = (kurzorPozicio[1] + i) * 82 + (kurzorPozicio[0] + i - 36);
+                sb[nyomdaIdx] = valasztottkarakterek[idx];
+                szinek[nyomdaIdx] = szin;
+                nyomdaIdx = (kurzorPozicio[1] - i) * 82 + (kurzorPozicio[0] + i - 36);
+                sb[nyomdaIdx] = valasztottkarakterek[idx];
+                szinek[nyomdaIdx] = szin;
+                nyomdaIdx = (kurzorPozicio[1] + i) * 82 + (kurzorPozicio[0] - i - 36);
+                sb[nyomdaIdx] = valasztottkarakterek[idx];
+                szinek[nyomdaIdx] = szin;
+            }
 
-    
+        }
+        static void Negyzetrajzolas(int meret, int[] kurzorPozicio, char[] valasztottkarakterek, int idx, StringBuilder sb, ConsoleColor szin, ConsoleColor[] szinek)
+        {
+            int nyomdaIdx;
+            for (int i = 0; i <= meret - 1; i++)
+            {
+                if (i == 0 || i == meret - 1)
+                {
+                    for (int j = 0; j < meret; j++)
+                    {
+                        nyomdaIdx = (kurzorPozicio[1] - (meret - 1) / 2) * 82 + (kurzorPozicio[0] + j - 36 - (meret - 1) / 2);
+                        sb[nyomdaIdx] = valasztottkarakterek[idx];
+                        szinek[nyomdaIdx] = szin;
+                    }
+                    for (int j = 0; j < meret; j++)
+                    {
+                        nyomdaIdx = (kurzorPozicio[1] + (meret - 1) / 2) * 82 + (kurzorPozicio[0] + j - 36 - (meret - 1) / 2);
+                        sb[nyomdaIdx] = valasztottkarakterek[idx];
+                        szinek[nyomdaIdx] = szin;
+                    }
+                }
+                else
+                {
+                    nyomdaIdx = (kurzorPozicio[1] + i - (meret - 1) / 2) * 82 + (kurzorPozicio[0] - 36 - (meret - 1) / 2);
+                    sb[nyomdaIdx] = valasztottkarakterek[idx];
+                    szinek[nyomdaIdx] = szin;
+                    nyomdaIdx = (kurzorPozicio[1] + i - (meret - 1) / 2) * 82 + (kurzorPozicio[0] - 36 + (meret - 1) / 2);
+                    sb[nyomdaIdx] = valasztottkarakterek[idx];
+                    szinek[nyomdaIdx] = szin;
+
+                }
+            }
+        }
+        static void Keresztrajzolas(int meret, int[] kurzorPozicio, char[] valasztottkarakterek, int idx, StringBuilder sb, ConsoleColor szin, ConsoleColor[] szinek)
+        {
+            int nyomdaIdx;
+            for (int i = 0; i < meret; i++)
+            {
+                nyomdaIdx = (kurzorPozicio[1] + i - (meret - 1) / 2) * 82 + (kurzorPozicio[0] - 36);
+                sb[nyomdaIdx] = valasztottkarakterek[idx];
+                szinek[nyomdaIdx] = szin;
+            }
+            for (int i = 0; i < meret; i++)
+            {
+                nyomdaIdx = (kurzorPozicio[1]) * 82 + (kurzorPozicio[0] - 36 - (meret - 1) / 2 + i);
+                sb[nyomdaIdx] = valasztottkarakterek[idx];
+                szinek[nyomdaIdx] = szin;
+            }
+        }
+        static void Rombuszrajzolas(int meret, int[] kurzorPozicio, char[] valasztottkarakterek, int idx, StringBuilder sb, ConsoleColor szin, ConsoleColor[] szinek)
+        {
+            int nyomdaIdx;
+            for (int i = 0; i <= (meret - 1) / 2; i++)
+            {
+                for (int j = 0; j <= (meret - 1) / 2; j++)
+                {
+                    nyomdaIdx = (kurzorPozicio[1] + i - (meret - 1) / 2) * 82 + (kurzorPozicio[0] + i - 36);
+                    sb[nyomdaIdx] = valasztottkarakterek[idx];
+                    szinek[nyomdaIdx] = szin;
+                    nyomdaIdx = (kurzorPozicio[1] + i - (meret - 1) / 2) * 82 + (kurzorPozicio[0] - i - 36);
+                    sb[nyomdaIdx] = valasztottkarakterek[idx];
+                    szinek[nyomdaIdx] = szin;
+                }
+                for (int j = 0; j <= (meret - 1) / 2; j++)
+                {
+                    nyomdaIdx = (kurzorPozicio[1] - i + (meret - 1) / 2) * 82 + (kurzorPozicio[0] + i - 36);
+                    sb[nyomdaIdx] = valasztottkarakterek[idx];
+                    szinek[nyomdaIdx] = szin;
+                    nyomdaIdx = (kurzorPozicio[1] - i + (meret - 1) / 2) * 82 + (kurzorPozicio[0] - i - 36);
+                    sb[nyomdaIdx] = valasztottkarakterek[idx];
+                    szinek[nyomdaIdx] = szin;
+                }
+
+            }
+
+        }
+
+
         static int RajzolasMod(char[] valasztottkarakterek, int idx, StringBuilder sb, int maxmagassag, ConsoleColor szin, ConsoleColor[] szinek, ref bool radir)
         {
-            bool felemelve = true;  
+            bool felemelve = true;
             int konzolMagassag = Console.WindowHeight;
 
-          
+
             int[] kurzorPozicio = new int[2];
             kurzorPozicio[0] = 36;
             kurzorPozicio[1] = 0;
             bool running = true;
 
-          
+
             Console.CursorVisible = false;
             Console.Clear();
             for (int i = 0; i < konzolMagassag - 1; i++)
@@ -376,12 +474,12 @@ namespace szabadkezirajzolo
                 Console.CursorVisible = false;
                 AllapotKiiras(x, y, valasztottkarakterek, idx, szin, felemelve, radir);
 
-             
+
                 Console.SetCursorPosition(kurzorPozicio[0], kurzorPozicio[1]);
                 Console.CursorVisible = true;
                 ConsoleKeyInfo bill = Console.ReadKey(true);
 
-              
+
                 int ujX = x;
                 int ujY = y;
                 bool lepes = false;
@@ -406,10 +504,10 @@ namespace szabadkezirajzolo
                         break;
 
                     case ConsoleKey.Spacebar:
-                        felemelve = !felemelve; 
+                        felemelve = !felemelve;
                         if (!felemelve)
                         {
-                            
+
                             CellaRajzolas(x, y, RajzoloKarakter(valasztottkarakterek, idx, radir), szin, sb, szinek);
                         }
                         break;
@@ -419,7 +517,7 @@ namespace szabadkezirajzolo
                         break;
 
                     case ConsoleKey.R:
-                        radir = !radir; 
+                        radir = !radir;
                         break;
 
                     case ConsoleKey.D1:
@@ -431,42 +529,19 @@ namespace szabadkezirajzolo
                         break;
 
                     case ConsoleKey.Enter:
-                       
+
                         CellaRajzolas(x, y, RajzoloKarakter(valasztottkarakterek, idx, radir), szin, sb, szinek);
                         break;
 
                     case ConsoleKey.F1:
-                        if ((kurzorPozicio[0] - 3 >= 36) &&
-                            (kurzorPozicio[0] + 3 <= 117) &&
-                            (kurzorPozicio[1] - 3 >= 0) &&
-                            (kurzorPozicio[1] + 3 <= 27))
+                        int meret = 3;
+
+                        if ((kurzorPozicio[0] - 1 >= 36) &&
+                            (kurzorPozicio[0] + 1 <= 117) &&
+                            (kurzorPozicio[1] - 1 >= 0) &&
+                            (kurzorPozicio[1] + 1 <= 27))
                         {
-                            int eredetihelyX = kurzorPozicio[0];
-                            int eredetihelyY = kurzorPozicio[1];
-
-                            int nyomdaIdx;
-
-                            
-                            nyomdaIdx = (eredetihelyY - 3) * 82 + (eredetihelyX - 3 - 36);
-                            sb[nyomdaIdx] = valasztottkarakterek[idx];
-                            szinek[nyomdaIdx] = szin;
-
-                            
-                            nyomdaIdx = (eredetihelyY - 3) * 82 + (eredetihelyX + 3 - 36);
-                            sb[nyomdaIdx] = valasztottkarakterek[idx];
-                            szinek[nyomdaIdx] = szin;
-
-                            
-                            nyomdaIdx = (eredetihelyY + 3) * 82 + (eredetihelyX + 3 - 36);
-                            sb[nyomdaIdx] = valasztottkarakterek[idx];
-                            szinek[nyomdaIdx] = szin;
-
-                            
-                            nyomdaIdx = (eredetihelyY + 3) * 82 + (eredetihelyX - 3 - 36);
-                            sb[nyomdaIdx] = valasztottkarakterek[idx];
-                            szinek[nyomdaIdx] = szin;
-
-                            
+                            Xrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
                             RajzlapKirajzolas(sb, szinek, maxmagassag);
                         }
                         else
@@ -475,41 +550,205 @@ namespace szabadkezirajzolo
                         }
 
                         break;
-                        /*
+
                     case ConsoleKey.F2:
+                        meret = 5;
+
+                        if ((kurzorPozicio[0] - 2 >= 36) &&
+                            (kurzorPozicio[0] + 2 <= 117) &&
+                            (kurzorPozicio[1] - 2 >= 0) &&
+                            (kurzorPozicio[1] + 2 <= 27))
+                        {
+                            Xrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
+
+                        break;
 
                     case ConsoleKey.F3:
+                        meret = 7;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Xrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
+
+                        break;
 
                     case ConsoleKey.F4:
+                        meret = 3;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Negyzetrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
+
+                        break;
+
 
                     case ConsoleKey.F5:
+                        meret = 5;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Negyzetrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
 
+                        break;
                     case ConsoleKey.F6:
+                        meret = 7;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Negyzetrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
+
+                        break;
 
                     case ConsoleKey.F7:
+                        meret = 3;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Keresztrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
+
+                        break;
 
                     case ConsoleKey.F8:
+                        meret = 5;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Keresztrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
 
+                        break;
                     case ConsoleKey.F9:
+                        meret = 7;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Keresztrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
 
+                        break;
                     case ConsoleKey.F10:
+                        meret = 3;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Rombuszrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
+
+                        break;
 
                     case ConsoleKey.F11:
+                        meret = 5;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Rombuszrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
+
+                        break;
 
                     case ConsoleKey.F12:
-                        */
+                        meret = 7;
+                        if ((kurzorPozicio[0] - 3 >= 36) &&
+                            (kurzorPozicio[0] + 3 <= 117) &&
+                            (kurzorPozicio[1] - 3 >= 0) &&
+                            (kurzorPozicio[1] + 3 <= 27))
+                        {
+                            Rombuszrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            RajzlapKirajzolas(sb, szinek, maxmagassag);
+                        }
+                        else
+                        {
+                            Console.Beep(1000, 1000);
+                        }
+
+                        break;
+
 
                     default:
-                        Console.Beep(); 
+                        Console.Beep();
                         break;
                 }
 
                 if (lepes)
                 {
-                    
+
                     if (ujX < 0 || ujX > 81 || ujY < 0 || ujY > maxmagassag - 1)
                     {
-                        Console.Beep(); 
+                        Console.Beep();
                     }
                     else
                     {
@@ -527,7 +766,7 @@ namespace szabadkezirajzolo
         }
         static void Mentes(string vegsoSzoveg, int mSzama)
         {
-            HelyreIras("milyen neven legyen elmentve a fajl?",45,15);
+            HelyreIras("milyen neven legyen elmentve a fajl?", 45, 15);
             String nev = Console.ReadLine();
 
 
@@ -541,7 +780,7 @@ namespace szabadkezirajzolo
         }
         static string Menurajzolas(bool rajzolaskozben, int valasztohelye, StringBuilder sb, bool radir)
         {
-            Console.CursorVisible = false; 
+            Console.CursorVisible = false;
             Console.Clear();
 
             Console.BackgroundColor = ConsoleColor.White;
@@ -702,28 +941,27 @@ namespace szabadkezirajzolo
             {
                 rajzSzovegesFormaja[i] = ' ';
             }
-         
+
             ConsoleColor szin = ConsoleColor.White;
-           
+
             ConsoleColor[] rajzSzinek = new ConsoleColor[82 * 28];
             for (int i = 0; i < rajzSzinek.Length; i++)
             {
-                rajzSzinek[i] = ConsoleColor.White; 
+                rajzSzinek[i] = ConsoleColor.White;
             }
             char[] valasztottkarakterek = new char[5]
             {
                 '#', '#', '#', '#', '#'
             };
             int valKarIdx = 0;
-            bool radir = false; 
-            //meg csinald mar azt meg hogy a szamokkal lehet kraktert valtoztatni
-            //en ugy talatam ki hoyg az index lesz valtoztatva mindig es a valasztotkarakterek[valkaridx] el irunk majd ki mindent
+            bool radir = false;
+
             int valasztohelye = 7;
 
             while (true)
             {
                 string szoveg = Menurajzolas(false, valasztohelye, rajzSzovegesFormaja, radir);
-                RajzlapKirajzolas(rajzSzovegesFormaja, rajzSzinek, maxmagassag); 
+                RajzlapKirajzolas(rajzSzovegesFormaja, rajzSzinek, maxmagassag);
 
                 ConsoleKeyInfo bill = Console.ReadKey(true);
 
@@ -756,43 +994,46 @@ namespace szabadkezirajzolo
                                 Karaktervalaszto(valasztottkarakterek);
                                 break;
                             case 8:
-                                szin = SzinValaszto(szin); 
+                                szin = SzinValaszto(szin);
                                 break;
                             case 9:
 
                                 string beolvasottSzoveg = Beolvasas();
-                                if(beolvasottSzoveg != "") { 
-                                beolvasottSzoveg = beolvasottSzoveg.Replace("\n", "");
+                                if (beolvasottSzoveg != "")
+                                {
+                                    beolvasottSzoveg = beolvasottSzoveg.Replace("\n", "");
 
-                                if (beolvasottSzoveg.Length <= 82 * 28)
-                                {
-                                    for (int i = 0; i < rajzSzovegesFormaja.Length; i++)
+                                    if (beolvasottSzoveg.Length <= 82 * 28)
                                     {
-                                        rajzSzovegesFormaja[i] = ' ';
+                                        for (int i = 0; i < rajzSzovegesFormaja.Length; i++)
+                                        {
+                                            rajzSzovegesFormaja[i] = ' ';
+                                        }
+                                        rajzSzovegesFormaja.Insert(0, beolvasottSzoveg);
+
+                                        for (int i = 0; i < rajzSzinek.Length; i++)
+                                        {
+                                            rajzSzinek[i] = szin;
+                                        }
                                     }
-                                    rajzSzovegesFormaja.Insert(0, beolvasottSzoveg);
-                                   
-                                    for (int i = 0; i < rajzSzinek.Length; i++)
+                                    else
                                     {
-                                        rajzSzinek[i] = szin;
+                                        Console.WriteLine("a beolvasas sikertelen volt");
+                                        Console.WriteLine(beolvasottSzoveg.Length);
+                                        Console.ReadKey(true);
+                                        Console.ReadKey();
                                     }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("a beolvasas sikertelen volt");
-                                    Console.WriteLine(beolvasottSzoveg.Length);
-                                    Console.ReadKey(true);
-                                    Console.ReadKey();
-                                }
                                 }
                                 break;
                             case 10:
                                 Mentes(szoveg, mentesekSzama);
                                 break;
                             case 12:
-                                radir = !radir; 
+                                radir = !radir;
                                 break;
                             case 13:
+                                Console.Clear();
+                                Console.WriteLine("A Programbol sikeresen kilepet");
                                 return;
 
                         }
