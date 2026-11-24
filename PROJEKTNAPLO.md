@@ -34,5 +34,5 @@
 Aki használt AI-t, írja le a nevét, miben kért segítséget, és mit tanult meg belőle.
 
 - Név: Bakos Bendeguz
-- Miben kértem segítséget: valaszthato karakterek listajanak elkeszitese,Hibak keresese,fajl beolvasasa elmentese
-- Mit tanultam meg: tombok kiirasa nem oylan mint pythonba ,nem lehet oket egybol ki irni (legalabbis char[]-t nem) helyette a string.join()-t kell hazsnalni
+- Miben kértem segítséget: valaszthato karakterek listajanak elkeszitese,Hibak keresese,fajl beolvasasa elmentese 
+- Mit tanultam meg: tombok kiirasa nem oylan mint pythonba ,nem lehet oket egybol ki irni (legalabbis char[]-t nem) helyette a string.join()-t kell hazsnalni,fajlol kezelese , openfiledialog hasznalata, enumerate és .select hasznalata
