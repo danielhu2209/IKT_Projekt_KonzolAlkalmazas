@@ -34,14 +34,14 @@ namespace szabadkezirajzolo
         {
             switch (szin)
             {
-                case ConsoleColor.White: return "feher";
+                case ConsoleColor.White: return "fehér";
                 case ConsoleColor.Red: return "piros";
-                case ConsoleColor.Green: return "zold";
-                case ConsoleColor.Blue: return "kek";
-                case ConsoleColor.Yellow: return "sarga";
-                case ConsoleColor.Cyan: return "cian";
+                case ConsoleColor.Green: return "zöld";
+                case ConsoleColor.Blue: return "kék";
+                case ConsoleColor.Yellow: return "sárga";
+                case ConsoleColor.Cyan: return "cián";
                 case ConsoleColor.Magenta: return "magenta";
-                case ConsoleColor.Gray: return "szurke";
+                case ConsoleColor.Gray: return "szürke";
                 default: return "ismeretlen";
             }
         }
@@ -71,13 +71,13 @@ namespace szabadkezirajzolo
                 }
 
 
-                HelyreIras("Valassz szint a nyilakkal!", 0, 1);
-                HelyreIras("Enter: kivalasztas", 0, 2);
-                HelyreIras("Esc: vissza a menube", 0, 3);
+                HelyreIras("Válassz színt a nyilakkal!", 0, 1);
+                HelyreIras("Enter: kiválasztás", 0, 2);
+                HelyreIras("Esc: vissza a menübe", 0, 3);
 
                 Console.BackgroundColor = ConsoleColor.White;
                 Console.ForegroundColor = ConsoleColor.Black;
-                HelyreIras("Szin valasztasa:", 3, 5);
+                HelyreIras("Szín választása:", 3, 5);
                 Console.ResetColor();
 
 
@@ -195,15 +195,15 @@ namespace szabadkezirajzolo
                 HelyreIras("KARAKTERVÁLASZTÓ", 0, 1);
                 Console.ResetColor();
                 HelyreIras(
-                    $"Valasszon az alabbi karakterek kozul. Jelenlegi karaktertar: {string.Join(" ", valasztottkarakterek)}",
+                    $"Válasszon az alábbi karakterek közül. Jelenlegi karaktertár: {string.Join(" ", valasztottkarakterek)}",
                     0, 3);
 
                 HelyreIras(
-                    $"A nyilak hasznalataval tudsz a karakterek kozott lepkedni " +
-                    $"\nAz Enterrel a modositas alatt allo karaktert modositod " +
-                    $"\nA Space lenyomasaval tovabb lepsz a karaktertar kovetkezo karakterenek modositasara " +
-                    $"\nJelenleg a {modositasAlattAlloKarakterIdx + 1}. karaktert modositja." +
-                    $"\nBarmely mas gomb megnyomasaval visszalephetsz a kezdo menube.",
+                    $"A nyilak használatával tudsz a karakterek között lépkedni " +
+                    $"\nAz Enterrel a módosítás alatt álló karaktert módosítod " +
+                    $"\nA Space lenyomásával tovább lépsz a karaktertár következő karakterének módosítására " +
+                    $"\nJelenleg a {modositasAlattAlloKarakterIdx + 1}. karaktert módosítja." +
+                    $"\nBármely más gomb megnyomásával visszaléphetsz a kezdő menübe.",
                     0, 4);
 
                 for (int i = 0; i < karakterek.Length; i++)
@@ -301,46 +301,46 @@ namespace szabadkezirajzolo
         {
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
-            HelyreIras("RAJZOLASI MOD", 0, 0);
+            HelyreIras("RAJZOLÁSI MÓD", 0, 0);
             Console.ResetColor();
 
-            PanelSor($"Pozicio:   ({x}, {y})", 2);
-            PanelSor($"Karakter:  {valasztottkarakterek[idx]}  ({idx + 1}. a tarbol)", 3);
+            PanelSor($"Pozíció:   ({x}, {y})", 2);
+            PanelSor($"Karakter:  {valasztottkarakterek[idx]}  ({idx + 1}. a tárból)", 3);
 
-            PanelSor("Szin:", 4);
+            PanelSor("Szín:", 4);
             Console.ForegroundColor = szin;
             HelyreIras(SzinNeve(szin), 11, 4);
             Console.ResetColor();
 
             if (felemelve)
             {
-                PanelSor("Eszkoz:    felemelve", 5);
+                PanelSor("Eszköz:    felemelve", 5);
             }
             else
             {
-                PanelSor("Eszkoz:    leteve (rajzol)", 5);
+                PanelSor("Eszköz:    letéve (rajzol)", 5);
             }
 
             if (radir)
             {
                 Console.BackgroundColor = ConsoleColor.White;
                 Console.ForegroundColor = ConsoleColor.Black;
-                PanelSor("Radir:     BE (torol)", 6);
+                PanelSor("Radír:     BE (töröl)", 6);
                 Console.ResetColor();
             }
             else
             {
-                PanelSor("Radir:     ki", 6);
+                PanelSor("Radír:     ki", 6);
             }
 
-            PanelSor($"Karaktertar: {string.Join(' ', valasztottkarakterek)}", 7);
+            PanelSor($"Karaktertár: {string.Join(' ', valasztottkarakterek)}", 7);
 
-            PanelSor("Nyilak:  mozgas", 9);
-            PanelSor("Szokoz:  eszkoz fel / le", 10);
-            PanelSor("1-5:     karakter valtasa", 11);
-            PanelSor("R:       radir be / ki", 12);
-            PanelSor("F1-F12:  nyomdak", 13);
-            PanelSor("Esc:     vissza a menube", 14);
+            PanelSor("Nyilak:  mozgás", 9);
+            PanelSor("Szóköz:  eszköz fel / le", 10);
+            PanelSor("1-5:     karakter váltása", 11);
+            PanelSor("R:       radír be / ki", 12);
+            PanelSor("F1-F12:  nyomdák", 13);
+            PanelSor("Esc:     vissza a menübe", 14);
         }
         static void Xrajzolas(int meret, int[] kurzorPozicio, char[] valasztottkarakterek, int idx, StringBuilder sb, ConsoleColor szin, ConsoleColor[] szinek)
         {
@@ -593,7 +593,7 @@ namespace szabadkezirajzolo
                             (kurzorPozicio[1] - 3 >= 0) &&
                             (kurzorPozicio[1] + 3 <= 27))
                         {
-                            Negyzetrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            Keresztrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
                             RajzlapKirajzolas(sb, szinek, maxmagassag);
                         }
                         else
@@ -611,7 +611,7 @@ namespace szabadkezirajzolo
                             (kurzorPozicio[1] - 3 >= 0) &&
                             (kurzorPozicio[1] + 3 <= 27))
                         {
-                            Negyzetrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            Keresztrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
                             RajzlapKirajzolas(sb, szinek, maxmagassag);
                         }
                         else
@@ -627,7 +627,7 @@ namespace szabadkezirajzolo
                             (kurzorPozicio[1] - 3 >= 0) &&
                             (kurzorPozicio[1] + 3 <= 27))
                         {
-                            Negyzetrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            Keresztrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
                             RajzlapKirajzolas(sb, szinek, maxmagassag);
                         }
                         else
@@ -644,7 +644,7 @@ namespace szabadkezirajzolo
                             (kurzorPozicio[1] - 3 >= 0) &&
                             (kurzorPozicio[1] + 3 <= 27))
                         {
-                            Keresztrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            Negyzetrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
                             RajzlapKirajzolas(sb, szinek, maxmagassag);
                         }
                         else
@@ -661,7 +661,7 @@ namespace szabadkezirajzolo
                             (kurzorPozicio[1] - 3 >= 0) &&
                             (kurzorPozicio[1] + 3 <= 27))
                         {
-                            Keresztrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            Negyzetrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
                             RajzlapKirajzolas(sb, szinek, maxmagassag);
                         }
                         else
@@ -677,7 +677,7 @@ namespace szabadkezirajzolo
                             (kurzorPozicio[1] - 3 >= 0) &&
                             (kurzorPozicio[1] + 3 <= 27))
                         {
-                            Keresztrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
+                            Negyzetrajzolas(meret, kurzorPozicio, valasztottkarakterek, idx, sb, szin, szinek);
                             RajzlapKirajzolas(sb, szinek, maxmagassag);
                         }
                         else
@@ -766,7 +766,7 @@ namespace szabadkezirajzolo
         }
         static void Mentes(string vegsoSzoveg, int mSzama)
         {
-            HelyreIras("milyen neven legyen elmentve a fajl?", 45, 15);
+            HelyreIras("Milyen néven legyen elmentve a fájl?", 45, 15);
             String nev = Console.ReadLine();
 
 
@@ -774,7 +774,7 @@ namespace szabadkezirajzolo
             File.WriteAllText(eredmenyHelye, string.Join(
                 "\n", Enumerable.Range(0, 28).Select(x => vegsoSzoveg.Substring(x * 82, 82)
                 )));
-            Console.WriteLine("Sikeresen elmentve(az asztalra) a folytatashoz nyomjon meg egy gombot");
+            Console.WriteLine("Sikeresen elmentve (az asztalra), a folytatáshoz nyomjon meg egy gombot");
             Console.ReadKey(true);
 
         }
@@ -786,16 +786,16 @@ namespace szabadkezirajzolo
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
 
-            Console.WriteLine("Konzolos Rajzolo alkalmazás (BB&ED)".ToUpper());
+            Console.WriteLine("Konzolos Rajzoló alkalmazás (BB&ED)".ToUpper());
 
             Console.ResetColor();
 
-            HelyreIras("Valassz a menu pontok kozul \na nyilakkal es az enterrel!\nA rajzolas megkezdesehez nyomd le\na SPACE billentyut!", 0, 1);
+            HelyreIras("Válassz a menüpontok közül \na nyilakkal és az enterrel!\nA rajzolás megkezdéséhez nyomd le\na SPACE billentyűt!", 0, 1);
 
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
 
-            HelyreIras("Menu:", 3, 5);
+            HelyreIras("Menü:", 3, 5);
 
             int konzolSzelesseg = Console.WindowWidth;
             int konzolMagassag = Console.WindowHeight;
@@ -813,7 +813,7 @@ namespace szabadkezirajzolo
                 Console.ForegroundColor = ConsoleColor.DarkRed;
             }
 
-            HelyreIras("Karakter valasztasa", 3, 7);
+            HelyreIras("Karakter választása", 3, 7);
 
             if (valasztohelye == 8)
             {
@@ -826,7 +826,7 @@ namespace szabadkezirajzolo
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
             }
 
-            HelyreIras("Szin valasztasa", 3, 8);
+            HelyreIras("Szín választása", 3, 8);
 
             if (valasztohelye == 9)
             {
@@ -839,7 +839,7 @@ namespace szabadkezirajzolo
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
             }
 
-            HelyreIras("Fajl beolvasas", 3, 9);
+            HelyreIras("Fájl beolvasás", 3, 9);
 
             if (valasztohelye == 10)
             {
@@ -852,7 +852,7 @@ namespace szabadkezirajzolo
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
             }
 
-            HelyreIras("Mentes", 3, 10);
+            HelyreIras("Mentés", 3, 10);
 
             if (valasztohelye == 11)
             {
@@ -864,7 +864,7 @@ namespace szabadkezirajzolo
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
-            HelyreIras("Segitseg", 3, 11);
+            HelyreIras("Segítség", 3, 11);
 
             if (valasztohelye == 12)
             {
@@ -879,11 +879,11 @@ namespace szabadkezirajzolo
 
             if (radir)
             {
-                HelyreIras("Radir: BE", 3, 12);
+                HelyreIras("Radír: BE", 3, 12);
             }
             else
             {
-                HelyreIras("Radir: KI", 3, 12);
+                HelyreIras("Radír: KI", 3, 12);
             }
 
             if (valasztohelye == 13)
@@ -897,7 +897,7 @@ namespace szabadkezirajzolo
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
 
-            HelyreIras("Kilepes", 3, 13);
+            HelyreIras("Kilépés", 3, 13);
 
             Console.ResetColor();
             for (int i = 0; i < konzolMagassag - 1; i++)
@@ -919,12 +919,20 @@ namespace szabadkezirajzolo
         static string Beolvasas()
         {
             OpenFileDialog fajl = new OpenFileDialog();
-            fajl.Filter = "Text files (*.txt)|*.txt";
+            fajl.Filter = "Szövegfájlok (*.txt)|*.txt";
 
             if (fajl.ShowDialog() == DialogResult.OK)
             {
-                string beolvasottFajl = string.Concat(File.ReadAllText(fajl.FileName));
-                return beolvasottFajl;
+                try
+                {
+                    string beolvasottFajl = string.Concat(File.ReadAllText(fajl.FileName));
+                    return beolvasottFajl;
+                }
+                catch
+                {
+                    Console.Beep();
+                    return "";
+                }
             }
 
             return "";
@@ -933,6 +941,7 @@ namespace szabadkezirajzolo
         [STAThread]
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             int maxmagassag = 28;
             int mentesekSzama = 0;
             StringBuilder rajzSzovegesFormaja = new StringBuilder();
@@ -1018,7 +1027,8 @@ namespace szabadkezirajzolo
                                     }
                                     else
                                     {
-                                        Console.WriteLine("a beolvasas sikertelen volt");
+                                        Console.Beep();
+                                        Console.WriteLine("A beolvasás sikertelen volt");
                                         Console.WriteLine(beolvasottSzoveg.Length);
                                         Console.ReadKey(true);
                                         Console.ReadKey();
@@ -1031,33 +1041,33 @@ namespace szabadkezirajzolo
                             case 11:
                                 Console.Clear();
 
-                                Console.WriteLine("===== SEGITSEG =====");
+                                Console.WriteLine("===== SEGÍTSÉG =====");
                                 Console.WriteLine();
-                                Console.WriteLine("MENU VEZERLESE");
-                                Console.WriteLine("Fel/Le nyilak - Menuvalasztas");
-                                Console.WriteLine("Enter        - Kivalasztas");
-                                Console.WriteLine("Space        - Rajzolasi mod");
+                                Console.WriteLine("MENÜ VEZÉRLÉSE");
+                                Console.WriteLine("Fel/Le nyilak - Menüválasztás");
+                                Console.WriteLine("Enter        - Kiválasztás");
+                                Console.WriteLine("Space        - Rajzolási mód");
                                 Console.WriteLine();
-                                Console.WriteLine("RAJZOLASI MOD");
-                                Console.WriteLine("Nyilak       - Kurzor mozgatasa");
-                                Console.WriteLine("Space        - Rajzeszkoz fel/le");
-                                Console.WriteLine("Enter        - Egy karakter rajzolasa");
-                                Console.WriteLine("1-5          - Rajzkarakter valtasa");
-                                Console.WriteLine("R            - Radir be/ki");
-                                Console.WriteLine("Esc          - Vissza a menube");
+                                Console.WriteLine("RAJZOLÁSI MÓD");
+                                Console.WriteLine("Nyilak       - Kurzor mozgatása");
+                                Console.WriteLine("Space        - Rajzeszköz fel/le");
+                                Console.WriteLine("Enter        - Egy karakter rajzolása");
+                                Console.WriteLine("1-5          - Rajzkarakter váltása");
+                                Console.WriteLine("R            - Radír be/ki");
+                                Console.WriteLine("Esc          - Vissza a menübe");
                                 Console.WriteLine();
-                                Console.WriteLine("NYOMDAK");
+                                Console.WriteLine("NYOMDÁK");
                                 Console.WriteLine("F1-F3        - X alakzat");
-                                Console.WriteLine("F4-F6        - Negyzetkeret");
-                                Console.WriteLine("F7-F9        - Kereszt (+)");
+                                Console.WriteLine("F4-F6        - Kereszt (+)");
+                                Console.WriteLine("F7-F9        - Négyzetkeret");
                                 Console.WriteLine("F10-F12      - Rombuszkeret");
                                 Console.WriteLine("Minden csoport: 3x3, 5x5, 7x7");
                                 Console.WriteLine();
-                                Console.WriteLine("MENTES ES BEOLVASAS");
-                                Console.WriteLine("Mentes       - Rajz mentese TXT fajlba");
-                                Console.WriteLine("Fajl beolvasas - TXT rajz megnyitasa");
+                                Console.WriteLine("MENTÉS ÉS BEOLVASÁS");
+                                Console.WriteLine("Mentés       - Rajz mentése TXT fájlba");
+                                Console.WriteLine("Fájl beolvasás - TXT rajz megnyitása");
                                 Console.WriteLine();
-                                Console.WriteLine("Visszalepeshez nyomj meg egy billentyut!");
+                                Console.WriteLine("Visszalépéshez nyomj meg egy billentyűt!");
                                 Console.ReadKey(true);
                                 break;
                             case 12:
@@ -1065,7 +1075,7 @@ namespace szabadkezirajzolo
                                 break;
                             case 13:
                                 Console.Clear();
-                                Console.WriteLine("A Programbol sikeresen kilepet");
+                                Console.WriteLine("A programból sikeresen kilépett");
                                 return;
 
                         }
