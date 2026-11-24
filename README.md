@@ -20,8 +20,8 @@
 - **1–5:** rajzkarakter kiválasztása
 - **R:** radír be- / kikapcsolása
 - **F1–F3:** X nyomda (3×3, 5×5, 7×7)
-- **F4–F6:** négyzetkeret nyomda (3×3, 5×5, 7×7)
-- **F7–F9:** kereszt nyomda (3×3, 5×5, 7×7)
+- **F4–F6:** kereszt nyomda (3×3, 5×5, 7×7)
+- **F7–F9:** négyzetkeret nyomda (3×3, 5×5, 7×7)
 - **F10–F12:** rombuszkeret nyomda (3×3, 5×5, 7×7)
 - **Esc:** vissza a főmenübe
 
